@@ -14,6 +14,12 @@ export default class Page1 extends React.Component {
         this.setState({login: value});
     }
 
+    isLoginChanged = () => {
+        if (this.state.login !== '') {
+            return true;
+        }
+    }
+
     validateEmail = () => {
         const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(String(this.state.email).toLowerCase());
@@ -39,10 +45,10 @@ export default class Page1 extends React.Component {
     }
 
     gotoPage2 = () => {
-        localStorage.setItem('login', document.getElementById('login').value);
-        localStorage.setItem('email', document.getElementById('email').value);
-        localStorage.setItem('pwd', document.getElementById('pwd').value);
-        localStorage.setItem('pwd_conf', document.getElementById('pwd_conf').value);
+        localStorage.setItem('login', this.state.login);
+        localStorage.setItem('email', this.state.email);
+        localStorage.setItem('pwd', this.state.pwd);
+        localStorage.setItem('pwd_conf', this.state.pwd_conf);
         this.props.history.push('/Page2');
     }
 
@@ -53,8 +59,8 @@ export default class Page1 extends React.Component {
                     <form>
                         <div>
                             <p id="login_p"> Login</p>
-                            <input id="login" className="inputs" placeholder="Enter login" onBlur={this.onChange1} value={this.state.login} onChange={this.handleLoginChange} />
-                            {!this.state.login && <span className='error-message-required'>Login is required</span>}
+                            <input id="login" className="inputs" placeholder="Enter login" value={this.state.login} onChange={this.handleLoginChange} />
+                            {!this.state.login && !this.isLoginChanged() && <span className='error-message-required'>Login is required</span>}
                         </div>
                         <div>
                             <p id="email_p">Email</p>

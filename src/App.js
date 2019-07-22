@@ -9,9 +9,6 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-
-
-
 function App() {
   return (
     <div className="firstPage">

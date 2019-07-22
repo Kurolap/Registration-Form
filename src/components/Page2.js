@@ -29,16 +29,16 @@ export default class Page2 extends React.Component {
         this.setState({addInfo: value});
     }
 
-    validateAge = () =>{
+    validateAge = () => {
         const regex = /^[0-9]+$/;
         return regex.test(String(this.state.age).toLowerCase()) && this.state.age > 0 && this.state.age < 100;
     }
 
     gotoPage3 = () => {
-        localStorage.setItem('fname', document.getElementById('fname').value);
-        localStorage.setItem('lname', document.getElementById('lname').value);
-        localStorage.setItem('age', document.getElementById('age').value);
-        localStorage.setItem('addInfo', document.getElementById('addInfo').value);
+        localStorage.setItem('fname', this.state.fname);
+        localStorage.setItem('lname', this.state.lname);
+        localStorage.setItem('age', this.state.age);
+        localStorage.setItem('addInfo', this.state.addInfo);
         this.props.history.push('/Page3');
     }
 
